@@ -16,6 +16,7 @@ class User(AbstractUser):
         UniversityUnit,
         on_delete=models.PROTECT,
         verbose_name='Подразделение университета',
+        null=True,
     )
 
     def __str__(self):
