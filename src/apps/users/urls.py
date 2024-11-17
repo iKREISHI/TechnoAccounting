@@ -1,4 +1,7 @@
 from django.urls import path
+
+from apps.users.views.activate_users import InactiveUsersListView
+from apps.users.views.approve_users import ApproveUsersListView
 from apps.users.views.registration import RegistrationView
 from django.contrib.auth import views
 
@@ -43,4 +46,7 @@ urlpatterns = [
         views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path('inactive-users/', InactiveUsersListView.as_view(), name='inactive_users_list'),
+    path('approve-users/', ApproveUsersListView.as_view(), name='approve_users_list'),
+
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views import View
-
+from django.contrib import messages
 from apps.users.forms.registration import RegistrationForm
 
 
@@ -22,12 +22,15 @@ class RegistrationView(View):
         form = RegistrationForm(request.POST)
 
         if form.is_valid():
-            form.instance.is_verificated = False
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
+            # Уведомление пользователя
+            messages.success(
+                request,
+                "Вы успешно зарегистрировались! "
+                "После подтверждения вашей учетной записи администратором вы сможете войти."
+            )
             return redirect('homepage')
 
         context.update({'form': form})

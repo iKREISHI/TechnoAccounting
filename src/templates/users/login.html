@@ -16,6 +16,7 @@
 {% csrf_token %}
     <div class="d-grid gap-2"><button type="submit" class="btn btn-primary" >Войти</button></div>
     <a href="{% url 'password_reset' %}" >Забыли пароль?</a>
+    <br><div class="d-grid gap-2"><a href="{% url 'registration' %}" type="submit" class="btn btn-success" >Зарегистриролваться</a></div>
 </form>
 </div>
 </div>
