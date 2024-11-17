@@ -58,7 +58,7 @@ class Maintenance(models.Model):
     )
 
     end_time = models.DateTimeField(
-        auto_now=True,
+        auto_now=False,
         blank=True,
         verbose_name='Время окончания обслуживания',
     )

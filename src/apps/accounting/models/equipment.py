@@ -73,7 +73,7 @@ class Equipment(models.Model):
 
     updated_at = models.DateTimeField(
         auto_now=True,
-        verbose_name='Время обновления'
+        verbose_name='Время обновления',
     )
 
     owner = models.ForeignKey(

@@ -30,7 +30,7 @@ class Rental(models.Model):
     )
 
     start_time = models.DateTimeField(
-        auto_now=True,
+        auto_now=False,
         blank=True,
         verbose_name='Время начала аренды',
     )
