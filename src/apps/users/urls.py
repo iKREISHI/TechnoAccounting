@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.users.views.activate_users import InactiveUsersListView
+from apps.users.views.inactive_users import InactiveUsersListView
 from apps.users.views.approve_users import ApproveUsersListView
 from apps.users.views.registration import RegistrationView
 from django.contrib.auth import views
