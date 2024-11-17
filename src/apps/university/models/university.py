@@ -60,4 +60,7 @@ class Auditorium(models.Model):
         verbose_name='Описание аудитории'
     )
 
+    def __str__(self):
+        return self.name
+
 

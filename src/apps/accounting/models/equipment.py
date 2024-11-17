@@ -20,6 +20,9 @@ class Location(models.Model):
         blank=False, null=True,
     )
 
+    def __str__(self):
+        return self.building.name + ' - ' + self.auditorium.name
+
 
 class Equipment(models.Model):
     name = models.CharField(
@@ -81,3 +84,6 @@ class Equipment(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Владелец оборудования'
     )
+
+    def __str__(self):
+        return self.name

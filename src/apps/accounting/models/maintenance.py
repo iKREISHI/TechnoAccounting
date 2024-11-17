@@ -62,3 +62,6 @@ class Maintenance(models.Model):
         blank=True,
         verbose_name='Время окончания обслуживания',
     )
+
+    def __str__(self):
+        return self.equipment.name + ' ' + self.service_worker

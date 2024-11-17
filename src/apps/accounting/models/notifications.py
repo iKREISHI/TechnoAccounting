@@ -11,3 +11,6 @@ class Notification(models.Model):
     message = models.TextField()
 
     datetime = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.message
