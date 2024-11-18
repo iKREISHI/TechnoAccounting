@@ -64,4 +64,4 @@ class Maintenance(models.Model):
     )
 
     def __str__(self):
-        return self.equipment.name + ' ' + self.service_worker
+        return self.equipment.first().name + ' ' + self.service_worker.__str__()
