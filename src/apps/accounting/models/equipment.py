@@ -17,7 +17,7 @@ class Location(models.Model):
 
     description = models.TextField(
         verbose_name='Описание',
-        blank=False, null=True,
+        blank=True, null=True,
     )
 
     def __str__(self):
@@ -27,28 +27,28 @@ class Location(models.Model):
 class Equipment(models.Model):
     name = models.CharField(
         max_length=255, verbose_name='Оборудование',
-        blank=True,
+        blank=False, null=False
     )
 
     inventory_number = models.CharField(
         max_length=32, verbose_name='Инвентарный номер',
-        blank=True,
+        blank=False, null=False
     )
 
     count = models.PositiveIntegerField(
         verbose_name='Количество оборудования',
-        blank=True,
+        blank=False, null=False,
         default=1,
     )
 
     photo = models.ImageField(
         verbose_name='Фото оборудования',
-        blank=False,
+        blank=True, null=True,
     )
 
     description = models.TextField(
         verbose_name='Описание оборудования',
-        blank=True,
+        blank=True, null=True,
     )
 
     STATUS_CHOICES = (

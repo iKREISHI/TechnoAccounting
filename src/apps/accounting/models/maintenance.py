@@ -8,7 +8,7 @@ class Maintenance(models.Model):
     equipment = models.ManyToManyField(
         Equipment,
         verbose_name="Оборудование",
-        blank=True,
+        blank=False,
     )
 
     service_worker = models.ForeignKey(
@@ -16,7 +16,8 @@ class Maintenance(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Обслуживающий персонал',
         related_name='maintenances_as_service_worker',
-        blank=True,
+        blank=False,
+        null=False,
     )
 
     reporter = models.ForeignKey(
@@ -24,6 +25,8 @@ class Maintenance(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Пользователь, сообщивший о неисправности',
         related_name='maintenances_as_reporter',
+        blank=False,
+        null=False,
     )
 
     assigned_by = models.ForeignKey(
@@ -31,11 +34,14 @@ class Maintenance(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Утверждённый',
         related_name='maintenances_as_assigned_by',
+        blank=False,
+        null=False,
     )
 
     issue_description = models.TextField(
         blank=True,
         verbose_name='Описание неисправности',
+        null=False,
     )
 
     STATUS_CHOICES = (
@@ -49,17 +55,19 @@ class Maintenance(models.Model):
         max_length=32,
         default='pending',
         verbose_name='Статус обслуживания',
+        blank=False,
+        null=False,
     )
 
     start_time = models.DateTimeField(
         auto_now=True,
-        blank=True,
+        blank=False,
         verbose_name='Время начала обслуживания'
     )
 
     end_time = models.DateTimeField(
         auto_now=False,
-        blank=True,
+        blank=False,
         verbose_name='Время окончания обслуживания',
     )
 

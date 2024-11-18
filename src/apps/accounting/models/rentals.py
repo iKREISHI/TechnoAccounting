@@ -10,7 +10,7 @@ class Rental(models.Model):
     equipment = models.ManyToManyField(
         Equipment,
         verbose_name='Оборудование',
-        blank=True,
+        blank=False,
     )
 
     renter = models.ForeignKey(
@@ -18,7 +18,8 @@ class Rental(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Арендатор',
         related_name='rentals_as_renter',
-        blank=True,
+        blank=False,
+        null=False,
     )
 
     assign_by = models.ForeignKey(
@@ -26,24 +27,28 @@ class Rental(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Утверждённый',
         related_name='rentals_as_assign_by',
-        blank=True,
+        blank=False,
+        null=False,
     )
 
     start_time = models.DateTimeField(
         auto_now=False,
-        blank=True,
+        blank=False,
+        null=False,
         verbose_name='Время начала аренды',
     )
 
     end_time = models.DateTimeField(
         auto_now=False,
-        blank=True,
+        blank=False,
+        null=False,
         verbose_name='Время окончания аренды',
     )
 
     actual_return_time = models.DateTimeField(
         auto_now=False,
-        blank=True,
+        blank=False,
+        null=False,
         verbose_name='Реальное время возврата оборудования',
     )
 
@@ -58,11 +63,14 @@ class Rental(models.Model):
         max_length=32,
         default='active',
         verbose_name='Статус аренды',
+        blank=False,
+        null=False,
     )
 
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
-        blank=True,
+        blank=False,
+        null=False,
         verbose_name='Расположение оборудования на время аренды',
     )
