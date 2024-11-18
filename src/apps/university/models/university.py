@@ -25,9 +25,13 @@ class UniversityUnit(models.Model):
         max_length=120, verbose_name='Название подразделения ВУЗа',
         blank=False, null=False,
     )
+    abbreviation = models.CharField(
+        max_length=16, verbose_name='Аббревиатура',
+        blank=False, null=False,
+    )
     description = models.TextField(
         verbose_name='Описание подразделения',
-        blank=False, null=True,
+        blank=True, null=True,
     )
 
     def __str__(self):
@@ -44,6 +48,11 @@ class UniversityBuilding(models.Model):
         verbose_name='Описание',
         blank=True, null=True,
     )
+    address = models.CharField(
+        verbose_name='Корпус',
+        blank=True, null=True,
+        max_length=255,
+    )
 
     def __str__(self):
         return self.name
@@ -56,11 +65,15 @@ class Auditorium(models.Model):
         max_length=20, verbose_name='Имя аудитории',
         blank=False, null=False,
     )
+    building = models.ForeignKey(
+        UniversityBuilding,
+        on_delete=models.CASCADE,
+        verbose_name='Корпус'
+    )
     description = models.TextField(
-        verbose_name='Описание аудитории'
+        verbose_name='Описание аудитории',
+        blank=True, null=True,
     )
 
     def __str__(self):
         return self.name
-
-
