@@ -43,7 +43,7 @@ class Equipment(models.Model):
 
     photo = models.ImageField(
         verbose_name='Фото оборудования',
-        blank=False,
+        blank=True,
     )
 
     description = models.TextField(

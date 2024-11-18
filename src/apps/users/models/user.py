@@ -20,8 +20,8 @@ class User(AbstractUser):
     )
 
     def __str__(self):
-        last_name = '' if not self.last_name else self.last_name[0].upper()
-        first_name = '' if not self.first_name else self.first_name[0].upper()
-        patronymic = '' if not self.patronymic else self.patronymic[0].upper()
+        last_name = '' if not self.last_name else self.last_name[0].upper() + self.last_name[1:]
+        first_name = '' if not self.first_name else self.first_name[0].upper() + self.first_name[1:]
+        patronymic = '' if not self.patronymic else self.patronymic[0].upper() + self.patronymic[1:]
 
         return f'{last_name} {first_name} {patronymic}'.strip()
