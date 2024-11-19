@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from apps.accounting.models import Location
-from apps.api_v0.serializers.location_serializers import LocationSerializer
+from apps.api_v0.serializers.location import LocationSerializer
 
 
 class LocationViewSet(viewsets.ModelViewSet):

@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from apps.accounting.models import Equipment
-from apps.api_v0.serializers.equipment_serializers import EquipmentSerializer
+from apps.api_v0.serializers.equipment import EquipmentSerializer
 
 
 class EquipmentViewSet(viewsets.ModelViewSet):

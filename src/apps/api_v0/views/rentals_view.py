@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from apps.accounting.models import Rental
-from apps.api_v0.serializers.rentals_serializers import RentalsSerializer
+from apps.api_v0.serializers.rentals import RentalsSerializer
 
 
 class RentalsViewSet(viewsets.ModelViewSet):

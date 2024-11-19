@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
-from apps.api_v0.serializers.auditorium_serializers import AuditoriumSerializer
+from apps.api_v0.serializers.auditorium import AuditoriumSerializer
 from apps.university.models import Auditorium
 
 

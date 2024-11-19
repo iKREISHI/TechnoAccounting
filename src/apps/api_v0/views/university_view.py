@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 
-from apps.api_v0.serializers.university_serializers import UniversitySerializer
+from apps.api_v0.serializers.university import UniversitySerializer
 from apps.university.models import University
 
 
