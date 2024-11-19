@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.university',
     'apps.accounting',
+    'apps.api_v0',
 ]
 
 MIDDLEWARE = [

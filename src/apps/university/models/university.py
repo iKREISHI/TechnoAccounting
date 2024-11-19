@@ -21,6 +21,7 @@ class University(models.Model):
 
 class UniversityUnit(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+
     name = models.CharField(
         max_length=120, verbose_name='Название подразделения ВУЗа',
         blank=False, null=False,
