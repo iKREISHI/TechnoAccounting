@@ -1,11 +1,11 @@
 from rest_framework import routers
 
-from apps.api_v0.views.auditorium_view import AuditoriumViewSet
-from apps.api_v0.views.equipment_view import EquipmentViewSet
-from apps.api_v0.views.location_view import LocationViewSet
-from apps.api_v0.views.university_unit_view import UniversityUnitViewSet
-from apps.api_v0.views.university_view import UniversityViewSet
-from apps.api_v0.views.universitybuilding_view import UniversityBuildingViewSet
+from apps.api_v0.views.auditorium import AuditoriumViewSet
+from apps.api_v0.views.equipment import EquipmentViewSet
+from apps.api_v0.views.location import LocationViewSet
+from apps.api_v0.views.university_unit import UniversityUnitViewSet
+from apps.api_v0.views.university import UniversityViewSet
+from apps.api_v0.views.university_building import UniversityBuildingViewSet
 
 router = routers.DefaultRouter()
 
