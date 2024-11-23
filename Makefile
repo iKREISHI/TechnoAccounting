@@ -1,5 +1,10 @@
 .PHONY: entrypoint
 
+static_files:
+	mkdir src/media
+	mkdir src/staticfiles
+	venv/bin/python src/manage.py collectstatic
+
 migrate:
 	venv/bin/python src/manage.py makemigrations
 	venv/bin/python src/manage.py migrate

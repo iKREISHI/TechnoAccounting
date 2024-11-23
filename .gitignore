@@ -38,5 +38,6 @@ migrations/
 migration/
 .idea/*
 media/
+staticfiles/
 
 recognition_service/__pycache__
