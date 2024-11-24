@@ -19,6 +19,54 @@ class EquipmentSerializer(serializers.ModelSerializer):
             'updated_at', 'owner'
         ]
 
+        read_only_fields = ['registration_datetime', 'updated_at']
+
+        extra_kwargs = {
+            'name': {
+                'error_messages': {
+                    'required': 'Название должно быть обязательно',
+                    'max_length': 'Название слишком длинное',
+                    'min_length': 'Название слишком короткое',
+                    'blank': 'Название не должно быть пустым',
+                }
+            },
+            'inventory_number': {
+                'error_messages': {
+                    'required': 'Инвентарный номер должен быть обязательным',
+                    'max_length': 'Инвентарный номер слишком длинный',
+                    'blank': 'Инвентарный номер не должен быть пустым'
+                }
+            },
+            'count': {
+                'error_messages': {
+                    'required': 'Количество должно быть обязательным',
+                    'blank': 'Количество оборудования не должен быть пустым'
+                }
+            },
+            'photo': {
+                'error_messages': {
+                    "required": "Загрузите фотографию.",
+                    "blank": "Фотография не может быть пустой.",
+                }
+            },
+            'description': {},
+            'status': {
+                'error_messages': {
+                    'required': 'Статус должен быть обязательным',
+                    'blank': 'Статус оборудования не должен быть пустым'
+                }
+            },
+            'location': {
+                'error_messages': {
+                    'required': 'Расположение должно быть обязательным',
+                    'blank': 'Расположение оборудования не должен быть пустым'
+                }
+            },
+            'registration_datetime': {
+
+            }
+        }
+
     def to_representation(self, instance):
         try:
             representation = super().to_representation(instance)
@@ -34,14 +82,6 @@ class EquipmentSerializer(serializers.ModelSerializer):
             return representation
         except Exception as e:
             raise ValidationError({'error': f"Ошибка в представлении данных: {str(e)}"})
-
-    def validate_inventory_number(self, value):
-        """
-        Проверка на уникальность инвентарного номера.
-        """
-        if Equipment.objects.filter(inventory_number=value).exists():
-            raise ValidationError({'inventory_number': 'Оборудование с таким инвентарным номером уже существует.'})
-        return value
 
     def validate_count(self, value):
         """

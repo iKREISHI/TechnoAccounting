@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from apps.accounting.models import Equipment
 from apps.accounting.serializers.equipment import EquipmentSerializer
 from apps.api_v0.permissions import IsOwnerOrStaff
+from django.utils.timezone import now
 
 
 class EquipmentModelViewSet(ModelViewSet):
@@ -20,9 +21,15 @@ class EquipmentModelViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         try:
-            serializer.save(owner=self.request.user)
+            serializer.save(
+                owner=self.request.user,
+                registration_datetime=now(),
+            )
         except ValidationError as e:
             raise ValidationError(f"Ошибка при создании оборудования: {str(e)}")
+
+    def perform_update(self, serializer):
+        serializer.save(updated_at=now())
 
     def get_queryset(self):
         queryset = super().get_queryset()

@@ -14,7 +14,7 @@ class Equipment(models.Model):
 
     inventory_number = models.CharField(
         max_length=32, verbose_name='Инвентарный номер',
-        blank=False, null=False
+        blank=False, null=False, unique=True
     )
 
     count = models.PositiveIntegerField(
@@ -52,7 +52,7 @@ class Equipment(models.Model):
     )
 
     registration_datetime = models.DateTimeField(
-        auto_now=True,
+        auto_now_add=True,
         verbose_name='Время добавление оборудования',
     )
 
