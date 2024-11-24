@@ -1,18 +1,31 @@
-from rest_framework import viewsets, status
-from rest_framework.response import Response
+from rest_framework import viewsets, permissions
+from rest_framework.exceptions import ValidationError
+from rest_framework.viewsets import ModelViewSet
 
 from apps.accounting.models import Equipment
-from apps.api_v0.serializers.equipment import EquipmentSerializer
+from apps.accounting.serializers.equipment import EquipmentSerializer
+from apps.api_v0.permissions import IsOwnerOrStaff
 
 
-class EquipmentViewSet(viewsets.ModelViewSet):
-    serializer_class = EquipmentSerializer
+class EquipmentModelViewSet(ModelViewSet):
     queryset = Equipment.objects.all()
-    http_method_names = ['get', 'post', 'head', 'options', 'list']
+    serializer_class = EquipmentSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [permissions.AllowAny]
+        else:
+            permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
+        return [permission() for permission in permission_classes]
+
+    def perform_create(self, serializer):
+        try:
+            serializer.save(owner=self.request.user)
+        except ValidationError as e:
+            raise ValidationError(f"Ошибка при создании оборудования: {str(e)}")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(owner=self.request.user)

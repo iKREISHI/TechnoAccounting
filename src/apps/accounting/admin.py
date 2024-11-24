@@ -6,17 +6,17 @@ User = get_user_model()
 
 
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ('building', 'auditorium', 'description')
-    list_filter = ('building', 'auditorium')
-    search_fields = ('building__name', 'auditorium__name')
-    ordering = ('building',)
+    list_display = ('auditorium', 'description')
+    list_filter = ('auditorium', )
+    search_fields = ('auditorium__name', )
+    ordering = ('auditorium',)
     fieldsets = (
-        (None, {'fields': ('building', 'auditorium', 'description')}),
+        (None, {'fields': ('auditorium', 'description')}),
     )
 
     verbose_name = "Расположение"
     verbose_name_plural = "Расположения"
-    list_display_links = ('building',)
+    list_display_links = ('auditorium',)
 
 
 class EquipmentAdmin(admin.ModelAdmin):

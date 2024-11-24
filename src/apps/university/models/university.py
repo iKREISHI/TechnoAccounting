@@ -78,3 +78,18 @@ class Auditorium(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Location(models.Model):
+
+    auditorium = models.ForeignKey(
+        Auditorium, on_delete=models.CASCADE, verbose_name='Аудитория'
+    )
+
+    description = models.TextField(
+        verbose_name='Описание',
+        blank=True, null=True,
+    )
+
+    def __str__(self):
+        return self.auditorium.name

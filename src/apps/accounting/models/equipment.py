@@ -1,27 +1,9 @@
 from django.db import models
 from apps.university.models import (
-    UniversityBuilding, Auditorium,
+    Location
 )
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
-
-class Location(models.Model):
-    building = models.ForeignKey(
-        UniversityBuilding, on_delete=models.CASCADE, verbose_name='Корпус Университета'
-    )
-
-    auditorium = models.ForeignKey(
-        Auditorium, on_delete=models.CASCADE, verbose_name='Аудитория'
-    )
-
-    description = models.TextField(
-        verbose_name='Описание',
-        blank=True, null=True,
-    )
-
-    def __str__(self):
-        return self.building.name + ' - ' + self.auditorium.name
 
 
 class Equipment(models.Model):
