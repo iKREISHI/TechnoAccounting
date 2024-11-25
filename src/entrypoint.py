@@ -15,7 +15,7 @@ def create_university():
 
     if not University.objects.filter(abbreviation=abbreviation, fullname=fullname).exists():
         university = University.objects.create(abbreviation=abbreviation, fullname=fullname)
-        print(f'Unversity created successfully: {university}')
+        print(f'University created successfully: {university}')
     else:
         print(f'University already exists!')
 
@@ -43,7 +43,10 @@ def create_university_building():
 
 def create_university_unit():
     # Получаем объект университета
-    university = University.objects.filter(abbreviation='ШГПУ', fullname='Шадринский Государственный Педагогический Университет').first()
+    university = University.objects.filter(
+        abbreviation='ШГПУ',
+        fullname='Шадринский Государственный Педагогический Университет'
+    ).first()
 
     # Проверяем, существует ли университет
     if not university:
@@ -73,10 +76,7 @@ def create_university_unit():
             print(f'University unit: {unit["name"]} already exists!')
 
 
-def create_superuser():
-    username = 'admin'
-    email = 'admin@mail.ru'
-    password = 'admin'
+def create_superuser(username: str = 'admin', email: str = 'admin@mail.ru', password: str = 'admin') -> None:
 
     if not User.objects.filter(username=username, email=email).exists():
         # Получаем подразделение
@@ -89,9 +89,9 @@ def create_superuser():
         # Создаем суперпользователя
         user = User.objects.create_superuser(username, email, password)
 
-        user.last_name = 'Admin'
-        user.first_name = 'Admin'
-        user.patronymic = 'Admin'
+        user.last_name = username.upper()
+        user.first_name = username[0].upper()
+        user.patronymic = username[0].upper()
         user.university_unit = university_unit  # Здесь передается объект, а не QuerySet
 
         user.save()
@@ -154,6 +154,7 @@ def create_technopark_auditorium():
 if __name__ == '__main__':
     print('entrypoint')
     create_university()
+    create_superuser('root', 'root@root.com', 'root')
     create_university_unit()
     create_superuser()
     create_university_building()

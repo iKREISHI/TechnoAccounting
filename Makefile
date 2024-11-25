@@ -16,3 +16,6 @@ full-migrate: clear-migrations migrate
 
 entrypoint:
 	DJANGO_SETTINGS_MODULE="base.settings" venv/bin/python src/entrypoint.py
+
+tests:
+	venv/bin/python src/manage.py test apps.api_v0
