@@ -8,6 +8,14 @@ from django.utils.timezone import now
 User = get_user_model()
 
 
+class EquipmentMiniSerializer(serializers.ModelSerializer):
+    """Сериализатор для отображения информации об оборудовании."""
+
+    class Meta:
+        model = Equipment
+        fields = ['id', 'name', 'inventory_number', 'status']
+
+
 class EquipmentSerializer(serializers.ModelSerializer):
     location = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all())
     owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False, allow_null=True)
