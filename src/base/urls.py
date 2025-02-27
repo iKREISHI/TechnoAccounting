@@ -19,9 +19,11 @@ from django.urls import path, include
 
 from apps.users.views import home
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='homepage'),
     path('users/', include('apps.users.urls')),
     path('api/v0/', include('apps.api_v0.urls')),
+    path('equipment/', include('apps.render.urls.equipment')),
 ]

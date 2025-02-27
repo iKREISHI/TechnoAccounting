@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link active" href="{% url 'equipment' %}">Оборудование</a>
               </li>
           </ul>
           <ul class="navbar-nav">
@@ -18,7 +18,9 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="#">Профиль</a></li>
-                      <li><a class="dropdown-item" href="#">Настройки</a></li>
+                      {% if user.is_superuser %}
+                            <li><a class="dropdown-item" href="/admin">Admin Panel</a></li>
+                      {% endif %}
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                   </ul>

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 mb-5 text-center">Оборудование</h1>
+
+<!-- Форма поиска -->
+<form method="GET" class="d-flex mb-3">
+    <input type="text" name="q" class="form-control me-2"
+           placeholder="Поиск по названию или номеру"
+           value="{{ search_query }}">
+    <button type="submit" class="btn btn-primary">Искать</button>
+</form>
+
+<!-- Таблица с данными -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th><a href="?q={{ search_query }}&sort={% if sort_option == 'name' %}-name{% else %}name{% endif %}" class="text-white text-decoration-none">Название</a></th>
+                <th><a href="?q={{ search_query }}&sort={% if sort_option == 'inventory_number' %}-inventory_number{% else %}inventory_number{% endif %}" class="text-white text-decoration-none">Инвентарный номер</a></th>
+                <th>Количество</th>
+                <th>Статус</th>
+                <th>Расположение</th>
+                <th><a href="?q={{ search_query }}&sort={% if sort_option == 'registration_datetime' %}-registration_datetime{% else %}registration_datetime{% endif %}" class="text-white text-decoration-none">Дата добавления</a></th>
+                <th class="text-center">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in equipment_list %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.inventory_number }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.get_status_display }}</td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.registration_datetime|date:"d.m.Y H:i" }}</td>
+                <td class="text-center">
+                    <a href="" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a href="" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center text-muted">Нет оборудования</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Пагинация -->
+{% if is_paginated %}
+<nav aria-label="Страницы">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?q={{ search_query }}&sort={{ sort_option }}&page={{ page_obj.previous_page_number }}">Пред.</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link">Пред.</a>
+            </li>
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <a class="page-link">{{ num }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?q={{ search_query }}&sort={{ sort_option }}&page={{ num }}">{{ num }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?q={{ search_query }}&sort={{ sort_option }}&page={{ page_obj.next_page_number }}">След.</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link">След.</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
